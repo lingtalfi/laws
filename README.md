@@ -199,6 +199,49 @@ It's used to identify a layout template file from a loader's perspective.
 
 
 
+Snippets
+===============
+
+```php
+<?php
+
+
+$conf = [
+    "layout" => [
+        "name" => "",
+    ],
+    "widgets" => [
+        [
+            "id" => "main.maintenance",
+            "name" => "landpage/default",
+        ],
+        [
+            "id" => "error",
+            "name" => "landpage/default",
+        ],
+    ],
+    "positions" => [
+        "top" => [
+            "name" => "default",
+        ],
+    ],
+];
+```
+
+
+
+Naming suggestions
+====================
+For viewIds, use simple page names: maintenance, error, product_page (instead of module prefixed names like MyModule_maintenance, HerModule_error, ...).
+Multiple modules providing the same viewId should be because you have the option of which module to choose,
+not because there is a semantical conflict.
+
+
+
+
+
+
+
 
 
 
