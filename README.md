@@ -3,7 +3,7 @@ Laws
 2017-03-27 --> 2017-04-03
 
 
-[![laws.jpg](https://s19.postimg.org/4ms8rn23n/laws.jpg)](https://postimg.org/image/wa4y5qna7/)
+[![laws.jpg](https://s19.postimg.org/tp3yvynab/laws.jpg)](https://postimg.org/image/tp3yvyna7/)
 
 
 Laws is an MVC system.
@@ -104,8 +104,7 @@ It has the following structure:
 - layout
     - name: $layoutTemplateName
 - widgets
-    - n:
-        - id: $widgetId 
+    - $widgetId:
         - name: $widgetTemplateName 
 - ?position: this key is optional
     - $positionName:
@@ -208,21 +207,14 @@ Snippets
 
 $conf = [
     "layout" => [
-        "name" => "landpage",
+        "name" => "landpage/default",
     ],
     "widgets" => [
-        [
-            "id" => "main.maintenance",
-            "name" => "landpage/default",
-        ],
-        [
-            "id" => "error",
-            "name" => "landpage/default",
-        ],
-    ],
-    "positions" => [
-        "top" => [
-            "name" => "default",
+        "main.any" => [
+            "name" => "exception/default",
+            "conf" => [
+                "displayMode" => "trace",
+            ],
         ],
     ],
 ];
