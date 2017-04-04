@@ -208,7 +208,7 @@ Snippets
 
 $conf = [
     "layout" => [
-        "name" => "",
+        "name" => "landpage",
     ],
     "widgets" => [
         [
