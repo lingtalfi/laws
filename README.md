@@ -244,7 +244,8 @@ includePath is the relative path, from the includes directory to your include fi
 Laws TWO
 ==============
 This is a suggestion for organizing web assets.
-
+Basically, there is one stylesheet per layout variation,
+then one per widget variation, then one for the user (to fix or supervise other stylesheets).
 
 
 
