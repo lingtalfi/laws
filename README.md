@@ -3,12 +3,22 @@ Laws
 2017-03-27 --> 2017-04-06
 
 
-[![laws.jpg](https://s19.postimg.org/h5mmdg38j/laws.jpg)](https://postimg.org/image/ixfl8cmlb/)
+[![laws.jpg](https://s19.postimg.org/4aeok6cir/laws.jpg)](https://postimg.org/image/x01kgtgin/)
 
 
 Laws is an MVC system.
 
 
+It has two parts, and you can implement one, the other, or both:
+
+- laws one: not related to the web assets
+- laws two: related to the web assets
+
+
+
+
+Laws ONE
+==============
 
 It works with the following concepts:
 
@@ -227,6 +237,13 @@ includePath
 ----------------
 includePath is the relative path, from the includes directory to your include file.
 
+
+
+
+
+Laws TWO
+==============
+This is a suggestion for organizing web assets.
 
 
 
