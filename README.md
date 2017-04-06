@@ -1,9 +1,9 @@
 Laws
 ========================
-2017-03-27 --> 2017-04-03
+2017-03-27 --> 2017-04-06
 
 
-[![laws.jpg](https://s19.postimg.org/tp3yvynab/laws.jpg)](https://postimg.org/image/tp3yvyna7/)
+[![laws.jpg](https://s19.postimg.org/vnjtlfujn/laws.jpg)](https://postimg.org/image/jyftxh3kv/)
 
 
 Laws is an MVC system.
@@ -18,6 +18,7 @@ It works with the following concepts:
 - widget
 - position
 - laws configuration file
+- includes
 
 
 And the variables below:
@@ -34,8 +35,13 @@ And the variables below:
 - layoutName
 - layoutVariationName
 - layoutTemplateName
+- includePath
 
 
+
+
+Concepts
+============
 
 
 
@@ -112,6 +118,28 @@ It has the following structure:
 
 
 
+includes
+-------------------------
+
+
+When you are creating multiple pages (or views), include is your best friend.
+It basically gives you the ability to re-use any part of your layout in other layouts.
+
+In other words, thanks to includes, you can factorize your layout in parts which make sense to you.
+
+
+Includes are located in the **app/theme/$themeName/includes** directory, so that you can quickly answer the question: where are the includes?
+
+Do you know the php include function?
+That's exactly the same mechanism here, except that the include directory is set for you.
+
+
+
+
+
+
+Variables
+============
 
 
 themeName
@@ -191,6 +219,14 @@ layoutTemplateName
 ---------------------
 The layoutTemplateName is the combination of the layoutName and the layoutVariationName (separated with a slash).
 It's used to identify a layout template file from a loader's perspective. 
+
+
+
+
+includePath
+----------------
+includePath is the relative path, from the includes directory to your include file.
+
 
 
 
