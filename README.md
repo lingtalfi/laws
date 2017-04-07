@@ -3,7 +3,7 @@ Laws
 2017-03-27 --> 2017-04-06
 
 
-[![laws.jpg](https://s19.postimg.org/t1djph6n7/laws.jpg)](https://postimg.org/image/vipawqqjj/)
+[![laws.jpg](https://s19.postimg.org/an7lz8jqb/laws.jpg)](https://postimg.org/image/j5h23kq8v/)
 
 
 Laws is an MVC system.
@@ -281,7 +281,7 @@ $conf = [
 
 Naming suggestions
 ====================
-For viewIds, use simple page names: maintenance, error, product_page (instead of module prefixed names like MyModule_maintenance, HerModule_error, ...).
+For viewIds, use simple page names: maintenance, error, productPage (instead of module prefixed names like MyModule_maintenance, HerModule_error, ...).
 Multiple modules providing the same viewId should be because you have the option of which module to choose,
 not because there is a semantical conflict.
 
