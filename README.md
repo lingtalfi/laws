@@ -3,7 +3,7 @@ Laws
 2017-03-27 --> 2017-04-06
 
 
-[![laws.jpg](https://s19.postimg.org/4aeok6cir/laws.jpg)](https://postimg.org/image/x01kgtgin/)
+[![laws.jpg](https://s19.postimg.org/t1djph6n7/laws.jpg)](https://postimg.org/image/vipawqqjj/)
 
 
 Laws is an MVC system.
@@ -246,6 +246,9 @@ Laws TWO
 This is a suggestion for organizing web assets.
 Basically, there is one stylesheet per layout variation,
 then one per widget variation, then one for the user (to fix or supervise other stylesheets).
+
+Also, each widget (or layout or position) has its own dedicated folder for assets.
+So, in the widget css directory, you also can put your images for instance.
 
 
 
