@@ -118,13 +118,13 @@ A laws configuration file (aka config file) defines the full configuration for a
 It has the following structure:
 
 - layout
-    - name: $layoutTemplateName
+    - tpl: $layoutTemplateName
 - widgets
     - $widgetId:
-        - name: $widgetTemplateName 
+        - tpl: $widgetTemplateName 
 - ?position: this key is optional
     - $positionName:
-        - name $positionTemplateName
+        - tpl $positionTemplateName
 
 
 
@@ -264,11 +264,11 @@ Snippets
 
 $conf = [
     "layout" => [
-        "name" => "landpage/default",
+        "tpl" => "landpage/default",
     ],
     "widgets" => [
         "main.any" => [
-            "name" => "exception/default",
+            "tpl" => "exception/default",
             "conf" => [
                 "displayMode" => "trace",
             ],
