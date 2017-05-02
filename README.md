@@ -1,9 +1,9 @@
 Laws
 ========================
-2017-03-27 --> 2017-04-06
+2017-03-27 --> 2017-05-02
 
 
-[![laws.jpg](https://s19.postimg.org/qehhv2hnn/laws.jpg)](https://postimg.org/image/h6p9edalb/)
+[![laws.jpg](https://s19.postimg.org/n294v2pr7/laws.jpg)](https://postimg.org/image/dhpi870f3/)
 
 
 Laws is an MVC system.
@@ -39,9 +39,6 @@ And the variables below:
 - widgetName
 - widgetVariationName
 - widgetTemplateName
-- positionName
-- positionVariationName
-- positionTemplateName
 - layoutName
 - layoutVariationName
 - layoutTemplateName
@@ -85,6 +82,7 @@ Inside a layout template file code, two methods are available:
 
 - widget ( $widgetId ): which renders the widget identified by $widgetId
 - position ( $positionName ): which renders all widgets bound to the position $positionName
+- includes ( $fileName ): which includes another layout or widget (like a php include)
 
 
 
@@ -105,8 +103,6 @@ Basically, a position is a widgets group.
 
 It wraps a group of widgets.
 
-It is represented by the mean of a template file.
-Inside a position template file, we have access to an array of the widgetIds for the given position.
 
 
 
@@ -122,9 +118,6 @@ It has the following structure:
 - widgets
     - $widgetId:
         - tpl: $widgetTemplateName 
-- ?position: this key is optional
-    - $positionName:
-        - tpl $positionTemplateName
 
 
 
@@ -192,26 +185,6 @@ The widgetTemplateName is the combination of the widgetName and the widgetVariat
 It's used to identify a widget template file from a loader's perspective. 
 
 
-
-positionName
-----------------
-positionName is the common/human name for a position (the template file of a position, which wraps a group of widgets).
-For instance, the top position.
-
-
-positionVariationName
----------------------
-A position can have many variations (that's what happens when a position author is inspired).
-We shall be able to identify each variation, and so the positionVariationName does that. 
-
-
-positionTemplateName
----------------------
-The positionTemplateName is the combination of the positionName and the positionVariationName (separated with a slash).
-It's used to identify a position template file from a loader's perspective. 
-
-
-
 layoutName
 ----------------
 layoutName is the common/human name of the layout.
@@ -252,7 +225,7 @@ So, in the widget css directory, you also can put your images for instance.
 
 
 
-
+The laws schema at the top of this document explains the assets paths.
 
 
 Snippets
@@ -268,7 +241,7 @@ $conf = [
     ],
     "widgets" => [
         "main.any" => [
-            "tpl" => "exception/default",
+            "tpl" => "Exception/default",
             "conf" => [
                 "displayMode" => "trace",
             ],
