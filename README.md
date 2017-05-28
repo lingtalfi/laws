@@ -1,249 +1,293 @@
 Laws
 ========================
-2017-03-27 --> 2017-05-02
+2017-03-27 --> 2017-05-28
 
+Laws stands for **LA**youts and **W**idgets **S**ystem.
 
-[![laws.jpg](https://s19.postimg.org/ihmyg561v/laws.jpg)](https://postimg.org/image/50pzx9vq7/)
 
+[![laws.jpg](https://s19.postimg.org/rc0glnjz7/laws.jpg)](https://postimg.org/image/kljzc7wtb/)
 
-Laws is an MVC system.
 
+Laws is a system that you can implement in your application to separate the data from 
+its html representation (an html representation is called view in law).
 
-It has two parts, and you can implement one, the other, or both:
+The benefit of separating the data from the view is that you can display the data using different views.
 
-- laws one: not related to the web assets
-- laws two: related to the web assets
+In other words, you create the data once for all, and then you create as many views as you want.
 
 
+Laws was first created as a helper for Controllers (for applications that use Controllers) to render 
+html things (pages or fragments of pages).
 
 
-Laws ONE
-==============
 
-It works with the following concepts:
+What's a theme?
+==================================
 
-- view
-- theme
-- layout
-- widget
-- position
-- laws configuration file
-- includes
+An application has a certain number of data to display.
+To make things easier to understand, let's say the application is composed of 10 items.
 
-
-And the variables below:
-
-- themeName
-- viewId
-- widgetId
-- widgetName
-- widgetVariationName
-- widgetTemplateName
-- layoutName
-- layoutVariationName
-- layoutTemplateName
-- includePath
-
-
-
-
-Concepts
-============
-
-
-
-view
--------
-
-A website is composed of pages.
-Each page can be considered as a **view**.
-
-A view displays a fully configured **layout**.
-
-The configuration of a layout is done from **laws configuration files** (aka configuration files).
-
-
-
-theme
---------
-A theme is like clothes for your website.
-It's basically a simple string, but you change it, it changes the look'n'feel of the website.
-
-
-
-
-
-layout
---------
-A layout holds the structure of a page.
-
-It is represented by the mean of a template file.
-Inside a layout template file code, two methods are available:
-
-- widget ( $widgetId ): which renders the widget identified by $widgetId
-- position ( $positionName ): which renders all widgets bound to the position $positionName
-- includes ( $fileName ): which includes another layout or widget (like a php include)
-
-
-
-widget
---------
-A widget brings functionality to a page.
-It is placed on a page.
-
-It is represented by the mean of a template file.
-Inside a widget template file, two methods are available: widget and position (same as those for the layout)
-
-
-
-position
---------
-A position represents a position of the layout.
-Basically, a position is a widgets group.
-
-It wraps a group of widgets.
-
-
-
-
-laws configuration file
--------------------------
-
-A laws configuration file (aka config file) defines the full configuration for a layout. 
-
-It has the following structure:
-
-- layout
-    - tpl: $layoutTemplateName
-- widgets
-    - $widgetId:
-        - tpl: $widgetTemplateName 
-
-
-
-includes
--------------------------
-
-
-When you are creating multiple pages (or views), include is your best friend.
-It basically gives you the ability to re-use any part of your layout in other layouts.
-
-In other words, thanks to includes, you can factorize your layout in parts which make sense to you.
-
-
-Includes are located in the **app/theme/$themeName/includes** directory, so that you can quickly answer the question: where are the includes?
-
-Do you know the php include function?
-That's exactly the same mechanism here, except that the include directory is set for you.
-
-
-
-
-
-
-Variables
-============
-
-
-themeName
--------------
-The name of the theme.
-
-
-
-
-viewId
------------
-The viewId identifies a view, the viewId is used to identify a specific laws configuration file.
-In other words, by choosing the viewId, you define exactly how the page will render.
-
-
-widgetId
------------
-A widgetId is an identifier that uniquely identifies a widget inside a given layout.
-By convention, if a widget is bound to a position, the widgetId starts with the $positionName (followed by a dot).
+Give the same application to Paul and Alice, both template authors.
  
-The widgetId is used inside template files, to call a widget, or internally to collect all widgets bound to a given position.
+Each author will create a view (html representation) for every item of the application.
+So Paul will create his 10 views, and Alice will create another 10 views.
 
+Paul's 10 views will be different from Alice's 10 views.
 
-widgetName
-----------------
-widgetName is the common/human name of the widget.
-For instance, the Hamburger widget.
+That's it: we have two themes: Paul's theme and Alice theme.
 
+Now we can switch from Paul theme to Alice's theme and vice versa at will.
 
+The same data is used (so the application dev is happy), but the look'n'feel is very different
+depending on whether you browse Paul or Alice's theme.
 
-widgetVariationName
----------------------
-A widget can have many variations (that's what happens when a widget author is inspired).
-We shall be able to identify each variation, and so the widgetVariationName does that. 
-
-
-widgetTemplateName
----------------------
-The widgetTemplateName is the combination of the widgetName and the widgetVariationName (separated with a slash).
-It's used to identify a widget template file from a loader's perspective. 
-
-
-layoutName
-----------------
-layoutName is the common/human name of the layout.
-For instance, the Main layout.
-
-
-
-layoutVariationName
----------------------
-A layout can have many variations (that's what happens when a layout author is inspired).
-We shall be able to identify each variation, and so the layoutVariationName does that. 
-
-
-layoutTemplateName
----------------------
-The layoutTemplateName is the combination of the layoutName and the layoutVariationName (separated with a slash).
-It's used to identify a layout template file from a loader's perspective. 
-
-
-
-
-includePath
-----------------
-includePath is the relative path, from the includes directory to your include file.
+That's the powerful concept of theme, and implementing laws in your application is one way to get there.
 
 
 
 
 
-Laws TWO
-==============
-This is a suggestion for organizing web assets.
-Basically, there is one stylesheet per layout variation,
-then one per widget variation, then one for the user (to fix or supervise other stylesheets).
+What about layouts and widgets?
+==================================
+ 
+A widget is an object that renders a portion of a page.
 
-Also, each widget (or layout or position) has its own dedicated folder for assets.
-So, in the widget css directory, you also can put your images for instance.
-
+Typically, the weather widget on some websites.
+But a widget can be as small as a title, or as big as a one page app.
 
 
-The laws schema at the top of this document explains the assets paths.
+The layout disposes widgets in an html structure.
+It can do so using at least two ways:
+
+- calling the widget's render method directly
+- calling a position
+
+A position is basically a pre-defined group of widgets.
+When the layout calls a position, all the widgets at that position are rendered.
 
 
-Snippets
-===============
+
+
+
+
+
+The main ideas of Laws
+============================
+
+The main idea of laws is to allow configuration of the Layouts and Widgets using a file rather than php code.
+
+
+Rendering a widget: the model
+-----------------------
+
+In the end, it's the widget which is responsible for displaying the data.
+As said earlier, Paul and Alice will create 2 different html representations of the widget, but the input of the widget is the same: it's the data.
+
+In Laws, the data is passed to the widgets in a php array form.
+We call that array the model.
+
+The model keys (and values conventions if any) needs to be carefully established by the widget author,
+because template authors like Paul and Alice will refer to that model as the documentation for creating their templates.
+
+
+
+Three rendering tools: widget, position and includes
+------------------------------------------------------
+
+Layout and widgets should be able to call those three methods:
+
+- widget ( widgetId )                   // return a rendered a widget
+- position ( positionName )             // return a rendered position
+- includes ( includePath )              // includes another file located in the includes directory (have a look at the file structure later in this document to see where the includes dir is located)
+
+
+
+
+
+Laws config file: the building block of laws
+---------------------------
+
+Layouts and Widgets are php objects in the end, but as humans we prefer to deal with a simple configuration array.
+That's the idea of a laws config file.
+
+The laws config file allows anyone to change the widget configuration just by changing some properties in a php array (rather
+than diving into some oop php code).
+
+
+The laws config file structure is extensible, and its base form is the following:
+
+
+```txt
+- layout:
+----- tpl: $layoutTemplateName
+- widgets:
+----- $widgetId: 
+--------- tpl: $widgetTemplateName 
+
+```
+
+With:
+
+- layoutTemplateName: $layoutName/$layoutVariationName
+- widgetTemplateName: $widgetName/$widgetVariationName
+- widgetId: ( $positionName . )? $widgetInternalName
+- layoutName: string, the name of the layout, for instance sandwich_2c (see 
+        related [layout naming conventions](https://github.com/lingtalfi/layout-naming-conventions#lnc_1) for ideas about naming layouts)
+- layoutVariationName: string, the name of the layout variation. like default, prototype, myVar1, ...
+- positionName: string, the name of the position (sidebar, main, bottom, ...)
+- widgetInternalName: string, a widget identifier (like dashboard, customerAccountMenu, customBlock, ....)
+
+
+
+Here is a concrete example in php of one of the simplest config file possible:
+
 
 ```php
 <?php
 
+$conf = [
+    "layout" => [
+        'tpl' => "sandwich_1c/raw",
+    ],
+    "widgets" => [
+        'maincontent.login' => [
+            "tpl" => 'Ekom/ForgotPassword/prototype',
+            "conf" => [
+                "key1" => "value1",
+                // ...
+            ],
+        ],
+        // other widgets here...
+    ],
+];
+```
+
+The config file is a key element in laws. 
+
+
+
+
+Computing the laws config file
+-------------------------
+
+
+Here is how laws defines the computing of the config file:
+
+
+Context: a view identifier $viewId is defined, and the application might or might not use a theme named $themeName.
+Usually, the laws system is used by module authors, and the viewId is composed of the module name, followed by 
+a slash, followed by an abstract identifier.
+
+So for instance "MyModule/contact" is a typical viewId for a MyModule module.
+
+
+
+- Step1: collecting the base config file
+    - if the theme is defined, and if the following file exists: **app/config/laws/theme/$themeName/$viewId.conf.php**,
+            then this is our base config file.
+    - otherwise, if the following file exists: **app/config/laws/$viewId.conf.php**, then this is our base config file
+    - otherwise, an error should be returned, because no config file could be found for the given $viewId
+    
+- Step2: searching for user config file and merging
+    - if the theme is defined, and if the following file exists: **app/config/laws/theme/$themeName/$viewId.user.conf.php**,
+            then this config is merged with the base config file.
+    - otherwise, if the following file exists: **app/config/laws/$viewId.user.conf.php**, then this is merged with
+            the base config file.
+            
+
+            
+Note that step2 was created so that a user could overwrite the base configuration file via a gui.            
+            
+            
+Note that the Controller has always the final word, as it is responsible for displaying the view in the first place.
+And so we would typically see this one liner in Controller's code; notice the second optional argument which allow
+the Controller to override the computed configuration.
+
+```php
+
+return $this->renderByViewId("MyModule/contact", LawsConfig::create()->replace([
+    'widgets' => [
+        'contactForm' => [
+            'tpl' => "MyModule/contactForm/special",
+        ],
+    ],
+]));
+
+```
+
+
+Shortcodes
+------------
+
+A shortcode is a string that can be processed and transformed into any value type (including arrays, objects, ...).
+
+Remember step 2 of computing the laws config file? Now with the help of shortcodes, the user can not only
+use the gui to creates strings or arrays, she now access some parts of the api and potentially call powerful methods.
+
+
+The shortcode notation is the following:
+
+- shortcode notation: <shortCodeProviderName> <:> <shortCodeFunction>
+
+With:
+- shortCodeProviderName: the name of the short code provider, in lowercase; for instance: ekom
+- shortCodeFunction: <providerMethod> (<:> <providerArgs>)?
+- providerMethod: the name of the method of the provider we want to call, for instance doActionAAA
+- providerArgs: arguments of the function, using the shortcode notation.
+
+
+The Shortcode notation is described in the source comments of the [ShortCodeTool](https://github.com/lingtalfi/BeeFramework/blob/master/Notation/String/ShortCode/Tool/ShortCodeTool.php) from the Bee planet.
+
+Basically, the shortcode notation allows you to do things like this:
+
+```php 
+az(ShortCodeTool::parse("hello=6, pou=[a, [b, c]], e='po=po', f='[pou]', g=[po => 4, go => [1,2,3], mo]"));
+```
+
+Which would result in this:
+
+```txt
+array(5) {
+  ["hello"] => int(6)
+  ["pou"] => array(2) {
+    [0] => string(1) "a"
+    [1] => array(2) {
+      [0] => string(1) "b"
+      [1] => string(1) "c"
+    }
+  }
+  ["e"] => string(5) "po=po"
+  ["f"] => string(5) "[pou]"
+  ["g"] => array(3) {
+    ["po"] => int(4)
+    ["go"] => array(3) {
+      [0] => int(1)
+      [1] => int(2)
+      [2] => int(3)
+    }
+    [0] => string(2) "mo"
+  }
+}
+
+```
+
+
+Here is how a shortcode looks like in action (in a laws config file):
+
+```php
+<?php
 
 $conf = [
     "layout" => [
-        "tpl" => "landpage/default",
+        'tpl' => "sandwich_1c/default",
     ],
     "widgets" => [
-        "main.any" => [
-            "tpl" => "Exception/default",
-            "conf" => [
-                "displayMode" => "trace",
+        'maincontent.breadcrumbs' => [
+            "tpl" => 'Ekom/BreadCrumbs/default',
+            'conf' => [
+                // this will return the breadcrumbs model so that the template can render the right categories
+                // and links of the breadcrumbs
+                'items' => 'ekom:getBreadCrumbs',  
             ],
         ],
     ],
@@ -252,11 +296,27 @@ $conf = [
 
 
 
-Naming suggestions
-====================
-For viewIds, use simple page names: maintenance, error, productPage (instead of module prefixed names like MyModule_maintenance, HerModule_error, ...).
-Multiple modules providing the same viewId should be because you have the option of which module to choose,
-not because there is a semantical conflict.
+
+Laws and the file structure
+================================
+
+Here is the structure you should implement to have a laws compliant system:
+
+
+// config files
+- $app/config/laws/$viewId.conf.php                         # the base configuration file if not overridden by the theme base configuration file
+- $app/config/laws/$viewId.conf.user.php                    # the overriding configuration file if not overridden by the theme overriding configuration file
+- $app/config/laws/theme/$themeName/$viewId.conf.php        # the theme base configuration file
+- $app/config/laws/theme/$themeName/$viewId.conf.user.php   # the theme overriding configuration file
+
+
+// theme files
+- $app/theme/$themeName/layouts/$layoutName/$layoutVariationName.tpl.php        # the layout's template file    
+- $app/theme/$themeName/widgets/$widgetName/$widgetVariationName.tpl.php        # the widget's template file    
+- $app/theme/$themeName/includes/$includePath                                   # path to an included file    
+
+// webserver
+- $app/www/theme/$themeName             # directory containing the assets owned/used by your theme
 
 
 
@@ -268,9 +328,4 @@ not because there is a semantical conflict.
 
 
 
-Related
-------------
-Laws is implemented in the [Kamille](https://github.com/lingtalfi/Kamille) framework. 
- 
- 
 
